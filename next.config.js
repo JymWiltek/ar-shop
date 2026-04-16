@@ -1,20 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@imgly/background-removal'],
-  webpack: (config) => {
-    // Handle import.meta used by @imgly/background-removal
+  webpack: (config, { isServer }) => {
+    // Treat @imgly/background-removal as native ESM so import.meta works
     config.module.rules.push({
-      test: /\.m?js$/,
-      include: /node_modules\/@imgly/,
-      resolve: { fullySpecified: false },
+      test: /\.js$/,
+      include: /node_modules\/@imgly\/background-removal/,
+      type: 'javascript/esm',
     })
 
-    // Replace import.meta.url with a browser-compatible shim
-    config.plugins.push(
-      new (require('webpack')).DefinePlugin({
-        'import.meta.url': JSON.stringify(''),
-      })
-    )
+    // Don't attempt to bundle WASM on server side
+    if (isServer) {
+      const externals = Array.isArray(config.externals)
+        ? config.externals
+        : [config.externals].filter(Boolean)
+      config.externals = [...externals, '@imgly/background-removal']
+    }
+
+    // Required for WASM
+    config.experiments = { ...config.experiments, asyncWebAssembly: true }
 
     return config
   },
