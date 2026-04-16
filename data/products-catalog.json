@@ -1,0 +1,20 @@
+[
+  {
+    "id": "faucet-a-mnyc0vrd",
+    "name": "a",
+    "brand": "",
+    "price": "",
+    "category": "faucet",
+    "description": "",
+    "image": "https://assets.meshy.ai/f3802e45-8562-4f1c-8ed5-1552fb38d64d/tasks/019d8aff-6d0d-7e5a-934b-0650868c3f78/output/preview.png?Expires=1776412847&Signature=osBzxHSjOOKTkDgRYAaZKZBuvlRq8xSCG9bR018QQbqUuYthgva25a6wvnKBjVWeq5mu6V~0xwnV2CpUEuaOUgr9zkNvWqVkgFlY7lvWXw74Yb~UvVZzPZfOIhN~Kz-z5YCyZWugaQ20d5A5UwUmc0NXEF-8Tm8W3-N9DL904g0QTfOoDwtYyfCrFZE0tP75OTeHtwIOXUHzsi-qdP511qxWQ06hfqQnR1RP9qDlA~ln2seZhDnKwOttQf4BVmhTpFSSCafn~eh1kIxFIaPbP29sbbUEVRDZfaE1DFNsc7H~dMC2b-iI0ItzsDiWwEOcyCp2vlRbRxNHjvlFigpCPA__&Key-Pair-Id=K1VGYTHIYLM9UM",
+    "glbUrl": "/models/faucet-a-mnyc0vrd.glb",
+    "usdzUrl": null,
+    "inStock": true,
+    "tags": [
+      "faucet",
+      "a"
+    ],
+    "_source": "vendor",
+    "_createdAt": "2026-04-14T08:00:53.566Z"
+  }
+]

@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f8f8f8;
+  color: #1a1a1a;
+}
+
+/* model-viewer full area */
+model-viewer {
+  width: 100%;
+  height: 100%;
+}
+
+/* AR launch button inside model-viewer */
+.ar-button {
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.ar-button:active {
+  background: #333;
+}
