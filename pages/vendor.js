@@ -40,12 +40,32 @@ export default function VendorPage() {
     setResult(null)
     setError('')
 
-    // Auto-start background removal
+    // Auto-start background removal (load from CDN to avoid webpack/import.meta issues)
     setRemovingBg(true)
     try {
-      const { removeBackground } = await import('@imgly/background-removal')
+      if (!window.__imglyBgRemoval) {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.type = 'module'
+          script.innerHTML = `
+            import { removeBackground } from 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/background-removal.js';
+            window.__imglyRemoveBackground = removeBackground;
+            window.dispatchEvent(new Event('imgly-loaded'));
+          `
+          window.addEventListener('imgly-loaded', resolve, { once: true })
+          script.onerror = reject
+          document.head.appendChild(script)
+        })
+        window.__imglyBgRemoval = true
+      }
+      // Wait for function to be available
+      let attempts = 0
+      while (!window.__imglyRemoveBackground && attempts < 50) {
+        await new Promise(r => setTimeout(r, 100))
+        attempts++
+      }
+      const removeBackground = window.__imglyRemoveBackground
       const blob = await removeBackground(file, {
-        publicPath: '/_next/static/chunks/',
         output: { format: 'image/png', quality: 1.0 },
       })
       const cleanFile = new File([blob], 'product-clean.png', { type: 'image/png' })
